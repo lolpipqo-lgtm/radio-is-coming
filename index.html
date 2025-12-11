@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RADIO</title>
+    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap" rel="stylesheet">
+    <style>
+        body {
+            background-color: black;
+            color: white;
+            text-align: center;
+            font-family: 'Great Vibes', cursive;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        img {
+            max-width: 400px;
+            width: 60%;
+            height: auto;
+            margin-bottom: 40px;
+            border-radius: 15px;
+        }
+
+        #countdown {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            font-size: 2.5em;
+            color: #ffcc00;
+            text-shadow:
+                0 0 5px #ffcc00,
+                0 0 10px #ffcc00,
+                0 0 20px #ff9900,
+                0 0 30px #ff9900;
+        }
+
+        .time-section {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .time-value {
+            font-size: 1.2em;
+            font-weight: bold;
+        }
+
+        .time-label {
+            font-size: 0.5em;
+            color: #fff3b0;
+        }
+    </style>
+</head>
+<body>
+    <!-- Updated image -->
+    <img src="Radio.png" alt="Radio Image">
+    
+    <div id="countdown">
+        <div class="time-section">
+            <span class="time-value" id="days">0</span>
+            <span class="time-label">Days</span>
+        </div>
+        <div class="time-section">
+            <span class="time-value" id="hours">0</span>
+            <span class="time-label">Hours</span>
+        </div>
+        <div class="time-section">
+            <span class="time-value" id="minutes">0</span>
+            <span class="time-label">Minutes</span>
+        </div>
+        <div class="time-section">
+            <span class="time-value" id="seconds">0</span>
+            <span class="time-label">Seconds</span>
+        </div>
+    </div>
+
+    <script>
+        const daysEl = document.getElementById('days');
+        const hoursEl = document.getElementById('hours');
+        const minutesEl = document.getElementById('minutes');
+        const secondsEl = document.getElementById('seconds');
+
+        function updateCountdown() {
+            const now = new Date();
+            let targetDate = new Date(now.getFullYear(), 1, 18, 0, 0, 0); // February 18th
+
+            if (now.getTime() > targetDate.getTime()) {
+                targetDate = new Date(now.getFullYear() + 1, 1, 18, 0, 0, 0);
+            }
+
+            const diff = targetDate.getTime() - now.getTime();
+
+            const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
+            const minutes = Math.floor((diff / (1000 * 60)) % 60);
+            const seconds = Math.floor((diff / 1000) % 60);
+
+            daysEl.textContent = days;
+            hoursEl.textContent = hours;
+            minutesEl.textContent = minutes;
+            secondsEl.textContent = seconds;
+        }
+
+        setInterval(updateCountdown, 1000);
+        updateCountdown();
+    </script>
+</body>
+</html>
